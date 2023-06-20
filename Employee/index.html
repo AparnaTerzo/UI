@@ -5,24 +5,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="loginPage"style="padding-left:500px;padding-top:200px">
-    <h1>Login</h1>
-    <div>
+  <div id="loginPage">
+    <h1 style="text-align: center;">Login</h1>
+  <div >
     <label>Username:</label>
-    <input type="text" id="username" placeholder="Username">
+    <input class="user1" type="text" id="username" placeholder="Username">
     
   </div>
   <br>
-    <div>
-    <label >Password:</label>
-    <input type="password" id="password" placeholder="Password">
+    <div >
+    <label  >Password:</label>
+    <input class="pass1"type="password" id="password" placeholder="Password">
     </div>
     <br>
+    <div >
     <button onclick="login()">Login</button>
+  </div>
     <p id="loginError" class="hidden">Invalid username or password.</p>
   </div>
 
-  <div id="tablePage" class="hidden" style="padding-left:500px;padding-top:200px">
+  <div id="tablePage" class="hidden" >
     <h1>Employee Details</h1>
     
     <button onclick="showAddEmployeeForm()">Add Employee</button>
@@ -54,7 +56,7 @@
     </table>
   </div>
 
-  <div id="detailPage" class="hidden" style="padding-left:500px;padding-top:200px">
+  <div id="detailPage" class="hidden">
     <h1>Employee Details</h1>
     <table>
       <tr>
@@ -63,19 +65,24 @@
   <td>  <p id="employeeMobile"></p></td>
   </table>
   <br>
-    <button onclick="goBack()">Back</button>
+    <button class="but1" onclick="goBack()">Back</button>
   </div>
 
-  <div id="addEmployeePage" class="hidden" style="padding-left:500px;padding-top:200px">
+  <div id="addEmployeePage" class="hidden" >
     <div>
     <h1>Add Employee</h1>
   </div>
   <br>
+  <div>
     <input type="text" id="addName" placeholder="Name">
     <input type="email" id="addEmail" placeholder="Email">
     <input type="tel" id="addMobile" placeholder="Mobile Number">
-    <button onclick="addEmployee()">Add</button>
-    <button onclick="goBack()">Back</button>
+  </div>
+  <br>
+    <button class="but1" onclick="addEmployee()">Add</button>
+    <br>
+    <br>
+    <button class="but1" onclick="goBack()">Back</button>
     <p id="addEmployeeError" class="error hidden"></p>
   </div>
 

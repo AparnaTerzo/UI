@@ -11,3 +11,70 @@ th, td {
 .error {
   color: red;
 }
+
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin-top:120px;
+  }
+
+ 
+  #loginPage,#tablePage,#detailPage,
+  #addEmployeePage{
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+
+  h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .pass1,.user1 {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .but1{
+    width: 30%;
+    padding: 10px;
+    margin-left: 150px;
+    background-color: #4caf50;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  .loginError,
+  .addEmployeeError {
+    color: #f00;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
