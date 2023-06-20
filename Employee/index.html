@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>task</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loginPage"style="padding-left:500px;padding-top:200px">
+    <h1>Login</h1>
+    <div>
+    <label>Username:</label>
+    <input type="text" id="username" placeholder="Username">
+    
+  </div>
+  <br>
+    <div>
+    <label >Password:</label>
+    <input type="password" id="password" placeholder="Password">
+    </div>
+    <br>
+    <button onclick="login()">Login</button>
+    <p id="loginError" class="hidden">Invalid username or password.</p>
+  </div>
+
+  <div id="tablePage" class="hidden" style="padding-left:500px;padding-top:200px">
+    <h1>Employee Details</h1>
+    
+    <button onclick="showAddEmployeeForm()">Add Employee</button>
+    <br>
+    <br>
+    <table id="employeeTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile Number</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="showEmployeeDetails(this)">
+          <td>Aparna</td>
+            <td>aparna123@gmail.com</td>
+            <td>2345678901</td>
+          <td><button onclick="deleteEmployee(this)">Delete</button></td>
+        </tr>
+        <tr onclick="showEmployeeDetails(this)">
+          <td>dharunya</td>
+            <td>dharun@gmail.com</td>
+            <td>7889678901</td>
+          <td><button onclick="deleteEmployee(this)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="detailPage" class="hidden" style="padding-left:500px;padding-top:200px">
+    <h1>Employee Details</h1>
+    <table>
+      <tr>
+  <td>  <p id="employeeName"></p></td>
+   <td> <p id="employeeEmail"></p></td>
+  <td>  <p id="employeeMobile"></p></td>
+  </table>
+  <br>
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <div id="addEmployeePage" class="hidden" style="padding-left:500px;padding-top:200px">
+    <div>
+    <h1>Add Employee</h1>
+  </div>
+  <br>
+    <input type="text" id="addName" placeholder="Name">
+    <input type="email" id="addEmail" placeholder="Email">
+    <input type="tel" id="addMobile" placeholder="Mobile Number">
+    <button onclick="addEmployee()">Add</button>
+    <button onclick="goBack()">Back</button>
+    <p id="addEmployeeError" class="error hidden"></p>
+  </div>
+
+  <script>
+    const username = "Admin";
+    const password = "admin@123";
+
+    function login() {
+      const enteredUsername = document.getElementById("username").value;
+      const enteredPassword = document.getElementById("password").value;
+
+      if (enteredUsername === username && enteredPassword === password) {
+        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("tablePage").classList.remove("hidden");
+      } else {
+        alert("Invalid username or password.");
+      }
+    }
+
+    function deleteEmployee(button) {
+      const row = button.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    }
+
+    function showEmployeeDetails(row) {
+      const name = row.cells[0].innerText;
+      const email = row.cells[1].innerText;
+      const mobile = row.cells[2].innerText;
+
+      document.getElementById("employeeName").innerText = "Name: " + name;
+      document.getElementById("employeeEmail").innerText = "Email: " + email;
+      document.getElementById("employeeMobile").innerText = "Mobile Number: " + mobile;
+
+      document.getElementById("tablePage").classList.add("hidden");
+      document.getElementById("detailPage").classList.remove("hidden");
+    }
+
+    function showAddEmployeeForm() {
+      document.getElementById("tablePage").classList.add("hidden");
+      document.getElementById("addEmployeePage").classList.remove("hidden");
+    }
+
+    function addEmployee() {
+      const name = document.getElementById("addName").value;
+      const email = document.getElementById("addEmail").value;
+      const mobile = document.getElementById("addMobile").value;
+
+      const errorElement = document.getElementById("addEmployeeError");
+      errorElement.innerText = "";
+
+      if (name && email && mobile) {
+        if (!validateEmail(email)) {
+      errorElement.innerText = "Please enter a valid email address.";
+      errorElement.classList.remove("hidden");
+      return;
+    }
+
+    if (!validateMobile(mobile)) {
+      errorElement.innerText = "Please enter a valid mobile number.";
+      errorElement.classList.remove("hidden");
+      return;
+    }
+        const table = document.getElementById("employeeTable");
+        const newRow = table.insertRow(table.rows.length);
+        const nameCell = newRow.insertCell(0);
+        const emailCell = newRow.insertCell(1);
+        const mobileCell = newRow.insertCell(2);
+        const actionCell = newRow.insertCell(3);
+        nameCell.innerText = name;
+        emailCell.innerText = email;
+        mobileCell.innerText = mobile;
+        actionCell.innerHTML = "<button onclick='deleteEmployee(this)'>Delete</button>";
+
+        newRow.onclick = function() {
+      showEmployeeDetails(newRow);
+        };
+        document.getElementById("addName").value = "";
+        document.getElementById("addEmail").value = "";
+        document.getElementById("addMobile").value = "";
+
+        document.getElementById("tablePage").classList.remove("hidden");
+        document.getElementById("addEmployeePage").classList.add("hidden");
+        
+      } else {
+        errorElement.innerText = "Please fill in all fields.";
+        errorElement.classList.remove("hidden");
+      }
+    }
+    function validateEmail(email) {
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+}
+
+function validateMobile(mobile) {
+  
+  const mobilePattern = /^[0-9]{10}$/;
+  return mobilePattern.test(mobile);
+}
+
+
+    function goBack() {
+      document.getElementById("detailPage").classList.add("hidden");
+      document.getElementById("addEmployeePage").classList.add("hidden");
+      document.getElementById("tablePage").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
