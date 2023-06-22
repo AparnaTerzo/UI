@@ -101,7 +101,7 @@ public class Main {
                     .limit(3)
                     .forEach(System.out::println);
 
-//            Exercise 7 — Calculate total  sum of all salary joined in Feb 2021
+//            Exercise 9 — Calculate total  sum of all salary joined in Feb 2021
             System.out.println("Sum of salary joined in FEburary 2021");
             LocalDate febStrart = LocalDate.of(2021,2,1);
             LocalDate febEnd = LocalDate.of(2021,2,28);
@@ -111,7 +111,7 @@ public class Main {
                 res+=Integer.valueOf(s);
             }
             System.out.println(res);
-//            Exercise 8 — Calculate average salary for employee joined on 14-Mar-2021
+//            Exercise 10 — Calculate average salary for employee joined on 14-Mar-2021
             LocalDate March = LocalDate.of(2021,3,14);
             System.out.println("\n\nAverage salary for employee joined on 14-Mar-2021");
             sal = emp.stream().filter(i->i.getJoiningDate().isEqual(March)).map(Employee::getSalary).collect(Collectors.toList());
@@ -128,13 +128,13 @@ public class Main {
             List<Employee> it = emp.stream().filter(i->i.getDepartment().equals("IT")).collect(Collectors.toList());
             List<Employee> manager = emp.stream().filter(i->i.getDepartment().equals("MANAGER")).collect(Collectors.toList());
 
-//            Exercise 9  — Obtain a data map with  Salary and employees count
+//            Exercise 11  — Obtain a data map with  Salary and employees count
             System.out.println("Salary and employee count map :");
             Map<String, Long> salaryEmployeeCountMap = emp.stream()
                     .collect(Collectors.groupingBy(Employee::getSalary, Collectors.counting()));
             System.out.println(salaryEmployeeCountMap);
 
-//            Exercise 10  — Produce a data map with employee records grouped by department
+//            Exercise 12  — Produce a data map with employee records grouped by department
             System.out.println("Data map with employee records grouped by department");
             Map<String,List<Employee>> map1 = new HashMap<>();
             map1.put("DEV",dev);
@@ -142,7 +142,8 @@ public class Main {
             map1.put("IT",it);
             map1.put("MANAGER", manager);
             System.out.println(map1);
-//            Exercise 11 — Produce a data map with department and their salary
+
+//            Exercise 13 — Produce a data map with department and their salary
             Map<String,List<String>> deptSalaryMap=new HashMap<>();
             List<String> itSalary=new ArrayList<>();
             List<String> devSalary=new ArrayList<>();
@@ -167,7 +168,8 @@ public class Main {
             System.out.println("Map of department and their salary list:");
             System.out.println(deptSalaryMap);
             System.out.println();
-//            Exercise 12 — Get the most highest paid by category
+
+//            Exercise 14 — Get the most highest paid by category
             Map<String, Optional<Employee>> highestPaidByCategoryMap = emp.stream()
                     .collect(Collectors.groupingBy(Employee::getDepartment,
                             Collectors.maxBy(Comparator.comparingDouble(employee -> Double.parseDouble(employee.getSalary())))));
