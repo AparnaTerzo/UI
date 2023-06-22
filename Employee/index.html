@@ -36,20 +36,20 @@
           <th>Name</th>
           <th>Email</th>
           <th>Mobile Number</th>
-          <th>Action</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr onclick="showEmployeeDetails(this)">
-          <td>Aparna</td>
-            <td>aparna123@gmail.com</td>
-            <td>2345678901</td>
+        <tr id="one">
+          <td >Aparna</td>
+            <td onclick="showEmployeeDetails('one')">aparna123@gmail.com</td>
+            <td onclick="showEmployeeDetails('one')">2345678901</td>
           <td><button onclick="deleteEmployee(this)">Delete</button></td>
         </tr>
-        <tr onclick="showEmployeeDetails(this)">
-          <td>dharunya</td>
-            <td>dharun@gmail.com</td>
-            <td>7889678901</td>
+        <tr id="two">
+          <td onclick="showEmployeeDetails('two')">dharunya</td>
+            <td onclick="showEmployeeDetails('two')">dharun@gmail.com</td>
+            <td onclick="showEmployeeDetails('two')">7889678901</td>
           <td><button onclick="deleteEmployee(this)">Delete</button></td>
         </tr>
       </tbody>
@@ -74,9 +74,9 @@
   </div>
   <br>
   <div>
-    <input type="text" id="addName" placeholder="Name">
-    <input type="email" id="addEmail" placeholder="Email">
-    <input type="tel" id="addMobile" placeholder="Mobile Number">
+    <input class="input1" type="text" id="addName" placeholder="Name">
+    <input  class="input1" type="email" id="addEmail" placeholder="Email">
+    <input  class="input1"  type="tel" id="addMobile" placeholder="Mobile Number">
   </div>
   <br>
     <button class="but1" onclick="addEmployee()">Add</button>
@@ -107,7 +107,21 @@
       row.parentNode.removeChild(row);
     }
 
-    function showEmployeeDetails(row) {
+    function showEmployeeDetails(id) {
+      var table = document.getElementById(id);
+      const name = table.cells[0].innerText;
+      const email = table.cells[1].innerText;
+      const mobile = table.cells[2].innerText;
+
+      document.getElementById("employeeName").innerText = "Name: " + name;
+      document.getElementById("employeeEmail").innerText = "Email: " + email;
+      document.getElementById("employeeMobile").innerText = "Mobile Number: " + mobile;
+
+      document.getElementById("tablePage").classList.add("hidden");
+      document.getElementById("detailPage").classList.remove("hidden");
+    }
+   
+    function showEmployeeDetails2(row) {
       const name = row.cells[0].innerText;
       const email = row.cells[1].innerText;
       const mobile = row.cells[2].innerText;
@@ -156,8 +170,14 @@
         mobileCell.innerText = mobile;
         actionCell.innerHTML = "<button onclick='deleteEmployee(this)'>Delete</button>";
 
-        newRow.onclick = function() {
-      showEmployeeDetails(newRow);
+        nameCell.onclick = function() {
+      showEmployeeDetails2(newRow);
+        };
+        emailCell.onclick = function() {
+      showEmployeeDetails2(newRow);
+        };
+        mobileCell.onclick = function() {
+      showEmployeeDetails2(newRow);
         };
         document.getElementById("addName").value = "";
         document.getElementById("addEmail").value = "";

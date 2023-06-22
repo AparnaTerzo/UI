@@ -20,8 +20,8 @@ th, td {
   }
 
  
-  #loginPage,#tablePage,#detailPage,
-  #addEmployeePage{
+  #loginPage,#tablePage,#detailPage
+ {
     width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -30,6 +30,17 @@ th, td {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
+  #addEmployeePage
+  {
+   
+     width: 600px;
+     margin: 0 auto;
+     padding: 20px;
+     background-color: #fff;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   }
 
 
   h1 {
@@ -78,3 +89,20 @@ th, td {
     margin-top: 10px;
   }
 
+tr{
+    background-color: #f2f2f2;
+}
+tr:hover{
+  opacity: 0.2;
+
+}
+
+.input1{
+  margin-left: 25px;
+  width:150px;
+  height:25px;
+
+}
+label{
+  margin-bottom: 10px;
+}
