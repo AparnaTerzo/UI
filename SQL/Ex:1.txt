@@ -1,4 +1,89 @@
+
+//EXERCISE : 1
 SELECT e.firstName AS Highest_Salary_Employee
 FROM employee e
          JOIN salary s USING(employee_id)
 WHERE s.salary = (SELECT MAX(salary) FROM salary);
+
+//EXERCISE : 2
+SELECT e.firstname
+FROM employee e
+         JOIN salary s ON e.employee_id = s.employee_id
+WHERE s.salary > (SELECT AVG(salary) FROM salary);
+
+//EXERCISE : 3
+SELECT firstname as Employee_Name
+FROM employee
+WHERE jobtitle = "Manager";
+
+//EXERCISE : 4
+SELECT firstname as Employee_Name
+FROM employee
+WHERE jobtitle <> "Manager";
+
+//EXERCISE : 5
+SELECT e.firstname as Employee_Name
+FROM employee e
+         JOIN address a ON e.employee_id = a.address_id
+WHERE a.city = 'Chennai';
+
+//EXERCISE : 6
+SELECT e.firstname,d.department_name
+FROM employee e
+         JOIN department d ON e.department_id = d.department_id
+WHERE d.department_name = 'Engineering';
+
+//EXERCISE : 7
+SELECT e.firstname as 'Employee Name' , d.ReportinG_to as 'Reports to' FROM
+    employee e JOIN department d USING(department_id) WHERE d.Reporting_to ="Manager";
+
+//EXERCISE : 8
+SELECT d.department_name, e.firstname
+FROM employee e
+         JOIN department d ON e.department_id = d.department_id
+ORDER BY d.department_name;
+
+//EXERCISE : 9
+SELECT d.department_name, COUNT(e.employee_id) AS EmployeeCount
+FROM employee e
+         JOIN department d USING(department_id)
+WHERE MONTH(e.hire_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
+  AND YEAR(e.hire_date) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
+GROUP BY d.department_name;
+
+//EXERCISE : 10
+
+SELECT e.firstname
+FROM employee e
+         JOIN salary s USING(employee_id)
+WHERE s.salary > 400000;
+
+//EXERCISE : 11
+SELECT e.firstname as First_Name, d.department_name as Department_Name
+FROM employee e
+         JOIN salary s USING(employee_id)
+         JOIN department d USING(department_id)
+WHERE s.salary > 400000;
+
+//EXERCISE : 12
+SELECT e.firstname FROM employee e JOIN leavetaken l ON
+        e.employee_id=l.employee_id WHERE end_date-start_date >=10;
+
+//EXERCISE : 13
+SELECT e.Firstname AS "Employee Name",
+       DATEDIFF(l.end_date, l.start_date) AS 'Days Absent'
+FROM employee e
+         JOIN department d ON e.department_id = d.department_id
+         JOIN salary s ON e.employee_id = s.employee_id
+         JOIN leavetaken l ON e.employee_id = l.employee_id
+WHERE d.department_name = 'Sales'
+  AND s.salary > 300000;
+
+
+//EXERCISE : 14
+SELECT e.firstname AS Employee_Name, SUM(s.Salary) AS TotalSalary
+FROM employee e
+         JOIN salary s USING (employee_id)
+WHERE YEAR(s.start_date) = 2023
+GROUP BY e.employee_id;
+
