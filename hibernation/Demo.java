@@ -1,10 +1,12 @@
 package org.example;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+
 import java.util.Properties;
 
 public class Demo {
@@ -14,6 +16,7 @@ public class Demo {
     private static SessionFactory sf;
     private static Session session;
     private static Transaction transaction;
+
     private static void setConfiguration() {
 
         configuration = new Configuration().addAnnotatedClass(Employee.class).addAnnotatedClass(Role.class).addAnnotatedClass(Department.class);
@@ -27,22 +30,24 @@ public class Demo {
         settings.put(Environment.HBM2DDL_AUTO, "update");
         configuration.setProperties(settings);
     }
-    private static void  openSession(){
+
+    private static void openSession() {
 
         sf = configuration.buildSessionFactory();
         session = sf.openSession();
         transaction = session.beginTransaction();
     }
-    private static void fetchRecords(){
+
+    private static void fetchRecords() {
         System.out.println("Fetch the records");
         openSession();
-        Employee emp= (Employee) session.get(Employee.class,3);
+        Employee emp = (Employee) session.get(Employee.class, 3);
         System.out.println(emp.toString());
         transaction.commit();
     }
 
 
-    private static void saveRecords(){
+    private static void saveRecords() {
         System.out.println("2. save Records");
         openSession();
         Department dept = new Department();
@@ -51,8 +56,6 @@ public class Demo {
         session.save(dept);
         transaction.commit();
     }
-
-
 
 
     private static void newDept() {
@@ -67,12 +70,11 @@ public class Demo {
     }
 
 
-
     public static void mapEmployee() {
         openSession();
         System.out.println("4. Map department  to Employee");
-       Employee emp = (Employee) session.get(Employee.class, 3);
-       Department dept = (Department) session.get(Department.class, 6);
+        Employee emp = (Employee) session.get(Employee.class, 3);
+        Department dept = (Department) session.get(Department.class, 6);
         emp.setDeptId(dept);
         session.save(emp);
         transaction.commit();
@@ -82,16 +84,17 @@ public class Demo {
         openSession();
         System.out.println("5.Update the Role name with id=1");
 
-       Role role = (Role) session.get(Role.class, 1);
+        Role role = (Role) session.get(Role.class, 1);
         role.setRoleName("PLATFORM");
         session.save(role);
         transaction.commit();
     }
+
     private static void deleteEmployee() {
 
-       openSession();
+        openSession();
         System.out.println("6. Delete one Employee");
-         Employee emp = session.get(Employee.class, 3);
+        Employee emp = session.get(Employee.class, 3);
         session.remove(emp);
         transaction.commit();
     }
@@ -102,8 +105,8 @@ public class Demo {
         setConfiguration();
         openSession();
         fetchRecords();
-       saveRecords();
-       newDept();
+        saveRecords();
+        newDept();
         mapEmployee();
         updateEmployee();
         deleteEmployee();
